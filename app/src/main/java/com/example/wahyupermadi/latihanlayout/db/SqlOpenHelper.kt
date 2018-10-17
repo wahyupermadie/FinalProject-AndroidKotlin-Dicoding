@@ -5,7 +5,7 @@ import android.database.sqlite.SQLiteDatabase
 import com.example.wahyupermadi.latihanlayout.model.MatchItem
 import org.jetbrains.anko.db.*
 
-class SqlOpenHelper(context: Context) : ManagedSQLiteOpenHelper(context, "db_match.db", null, 1) {
+class SqlOpenHelper(context: Context) : ManagedSQLiteOpenHelper(context, "db_matchs.db", null, 1) {
     companion object {
         private var instance : SqlOpenHelper? = null
 
@@ -25,7 +25,25 @@ class SqlOpenHelper(context: Context) : ManagedSQLiteOpenHelper(context, "db_mat
             MatchItem.AWAY_TEAM to TEXT,
             MatchItem.EVENT_DATE to TEXT,
             MatchItem.AWAY_SCORE to TEXT,
-            MatchItem.HOME_SCORE to TEXT)
+            MatchItem.HOME_SCORE to TEXT,
+            MatchItem.AWAY_FORMATION to TEXT,
+            MatchItem.HOME_FORMATION to TEXT,
+            MatchItem.HOME_SHOTS to TEXT,
+            MatchItem.AWAY_SHOTS to TEXT,
+            MatchItem.HOME_GK to TEXT,
+            MatchItem.HOME_DEFF to TEXT,
+            MatchItem.HOME_FW to TEXT,
+            MatchItem.HOME_MF to TEXT,
+            MatchItem.HOME_SUBS to TEXT,
+            MatchItem.AWAY_GK to TEXT,
+            MatchItem.AWAY_DEFF to TEXT,
+            MatchItem.AWAY_FW to TEXT,
+            MatchItem.AWAY_MF to TEXT,
+            MatchItem.AWAY_SUBS to TEXT,
+            MatchItem.ID_HOME to TEXT,
+            MatchItem.ID_AWAY to TEXT,
+            MatchItem.AWAY_GOAL to TEXT,
+            MatchItem.HOME_GOAL to TEXT)
     }
 
     override fun onUpgrade(p0: SQLiteDatabase?, p1: Int, p2: Int) {

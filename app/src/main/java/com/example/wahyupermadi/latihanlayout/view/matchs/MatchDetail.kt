@@ -23,13 +23,15 @@ import io.reactivex.schedulers.Schedulers
 import io.reactivex.subscribers.ResourceSubscriber
 import kotlinx.android.synthetic.main.activity_match_detail.*
 import org.jetbrains.anko.ctx
+import org.jetbrains.anko.db.classParser
 import org.jetbrains.anko.db.delete
 import org.jetbrains.anko.db.insert
+import org.jetbrains.anko.db.select
 import org.jetbrains.anko.toast
 import java.sql.SQLClientInfoException
 
 class MatchDetail : AppCompatActivity() {
-    lateinit var matchs : MatchItem
+    var matchs : MatchItem? = null
     var homeTeam : MutableList<TeamsItem> = mutableListOf()
     var awayTeam : MutableList<TeamsItem> = mutableListOf()
     private var menuItem: Menu? = null
@@ -37,33 +39,33 @@ class MatchDetail : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_match_detail)
-
         matchs = intent.getParcelableExtra("match")
-        getHomeImage(matchs.idHomeTeam)
-        getAwayImage(matchs.idAwayTeam)
+        checkFavorite()
+        getHomeImage(matchs?.idHomeTeam)
+        getAwayImage(matchs?.idAwayTeam)
 
-        tv_detail_match_date.text = matchs.dateEvent
-        tv_home_detail_team_name.text = matchs.strHomeTeam
-        tv_home_detail_score.text = matchs.intHomeScore
-        tv_home_detail_deff.text = matchs.strHomeLineupDefense
-        tv_home_detail_fw.text = matchs.strHomeLineupForward
-        tv_home_detail_gk.text = matchs.strHomeLineupGoalkeeper
-        tv_home_detail_goals.text = matchs.strHomeGoalDetails
-        tv_home_detail_mf.text = matchs.strHomeLineupMidfield
-        tv_home_detail_shots.text = matchs.intHomeShots
-        tv_home_detail_sub.text = matchs.strHomeLineupSubstitutes
-        tv_home_detail_team_formation.text = matchs.strHomeFormation
+        tv_detail_match_date.text = matchs?.dateEvent
+        tv_home_detail_team_name.text = matchs?.strHomeTeam
+        tv_home_detail_score.text = matchs?.intHomeScore
+        tv_home_detail_deff.text = matchs?.strHomeLineupDefense
+        tv_home_detail_fw.text = matchs?.strHomeLineupForward
+        tv_home_detail_gk.text = matchs?.strHomeLineupGoalkeeper
+        tv_home_detail_goals.text = matchs?.strHomeGoalDetails
+        tv_home_detail_mf.text = matchs?.strHomeLineupMidfield
+        tv_home_detail_shots.text = matchs?.intHomeShots
+        tv_home_detail_sub.text = matchs?.strHomeLineupSubstitutes
+        tv_home_detail_team_formation.text = matchs?.strHomeFormation
 
-        tv_away_detail_team_name.text = matchs.strAwayTeam
-        tv_away_detail_score.text = matchs.intAwayScore
-        tv_away_detail_deff.text = matchs.strAwayLineupDefense
-        tv_away_detail_fw.text = matchs.strAwayLineupForward
-        tv_away_detail_gk.text = matchs.strAwayLineupGoalkeeper
-        tv_away_detail_goals.text = matchs.strAwayGoalDetails
-        tv_away_detail_mf.text = matchs.strAwayLineupMidfield
-        tv_away_detail_shots.text = matchs.intAwayShots
-        tv_away_detail_sub.text = matchs.strAwayLineupSubstitutes
-        tv_away_detail_team_formation.text = matchs.strAwayFormation
+        tv_away_detail_team_name.text = matchs?.strAwayTeam
+        tv_away_detail_score.text = matchs?.intAwayScore
+        tv_away_detail_deff.text = matchs?.strAwayLineupDefense
+        tv_away_detail_fw.text = matchs?.strAwayLineupForward
+        tv_away_detail_gk.text = matchs?.strAwayLineupGoalkeeper
+        tv_away_detail_goals.text = matchs?.strAwayGoalDetails
+        tv_away_detail_mf.text = matchs?.strAwayLineupMidfield
+        tv_away_detail_shots.text = matchs?.intAwayShots
+        tv_away_detail_sub.text = matchs?.strAwayLineupSubstitutes
+        tv_away_detail_team_formation.text = matchs?.strAwayFormation
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -94,12 +96,31 @@ class MatchDetail : AppCompatActivity() {
         try {
             database.use{
                 insert(MatchItem.TABLE_MATCH,
-                    MatchItem.ID_MATCH to matchs.idEvent,
-                    MatchItem.AWAY_TEAM to matchs.strAwayTeam,
-                    MatchItem.HOME_TEAM to matchs.strHomeTeam,
-                    MatchItem.HOME_SCORE to matchs.intHomeScore,
-                    MatchItem.AWAY_SCORE to matchs.intHomeScore,
-                    MatchItem.EVENT_DATE to matchs.dateEvent)
+                    MatchItem.ID_MATCH to matchs?.idEvent,
+                    MatchItem.ID_MATCH to matchs?.idEvent,
+                    MatchItem.HOME_TEAM to matchs?.strHomeTeam,
+                    MatchItem.AWAY_TEAM to matchs?.strAwayTeam,
+                    MatchItem.EVENT_DATE to matchs?.dateEvent,
+                    MatchItem.AWAY_SCORE to matchs?.intAwayScore,
+                    MatchItem.HOME_SCORE to matchs?.intHomeScore,
+                    MatchItem.AWAY_FORMATION to matchs?.strAwayFormation,
+                    MatchItem.HOME_FORMATION to matchs?.strHomeFormation,
+                    MatchItem.HOME_SHOTS to matchs?.intHomeShots,
+                    MatchItem.AWAY_SHOTS to matchs?.intAwayShots,
+                    MatchItem.HOME_GK to matchs?.strHomeLineupGoalkeeper,
+                    MatchItem.HOME_DEFF to matchs?.strHomeLineupDefense,
+                    MatchItem.HOME_FW to matchs?.strHomeLineupForward,
+                    MatchItem.HOME_MF to matchs?.strHomeLineupMidfield,
+                    MatchItem.HOME_SUBS to matchs?.strHomeLineupSubstitutes,
+                    MatchItem.AWAY_GK to matchs?.strAwayLineupGoalkeeper,
+                    MatchItem.AWAY_DEFF to matchs?.strAwayLineupDefense,
+                    MatchItem.AWAY_FW to matchs?.strAwayLineupForward,
+                    MatchItem.AWAY_MF to matchs?.strAwayLineupMidfield,
+                    MatchItem.AWAY_SUBS to matchs?.strAwayLineupSubstitutes,
+                    MatchItem.ID_HOME to matchs?.idHomeTeam,
+                    MatchItem.ID_AWAY to matchs?.idAwayTeam,
+                    MatchItem.AWAY_GOAL to matchs?.strAwayGoalDetails,
+                    MatchItem.HOME_GOAL to matchs?.strHomeGoalDetails)
             }
             toast("Successfully Added")
         }catch (e : SQLiteConstraintException){
@@ -111,11 +132,21 @@ class MatchDetail : AppCompatActivity() {
         try {
             database.use{
                 delete(MatchItem.TABLE_MATCH, "(ID_MATCH = {id})",
-                    "id" to matchs.idEvent.toString())
+                    "id" to matchs?.idEvent.toString())
             }
             toast("Remove Sukes")
         }catch (e: SQLClientInfoException){
             toast(""+e.printStackTrace())
+        }
+    }
+
+    private fun checkFavorite(){
+        database.use {
+            val match = select(MatchItem.TABLE_MATCH)
+                .whereArgs("(ID_MATCH = {id})",
+                    "id" to matchs?.idEvent.toString())
+            val favorite = match.parseList(classParser<MatchItem>())
+            if(!favorite.isEmpty()) isFavorite = true
         }
     }
 
