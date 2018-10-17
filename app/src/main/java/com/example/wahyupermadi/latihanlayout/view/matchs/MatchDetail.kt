@@ -39,6 +39,9 @@ class MatchDetail : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_match_detail)
+        supportActionBar?.title = "Match Detail"
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         matchs = intent.getParcelableExtra("match")
         checkFavorite()
         getHomeImage(matchs?.idHomeTeam)

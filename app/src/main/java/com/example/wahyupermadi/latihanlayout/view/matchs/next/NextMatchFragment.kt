@@ -4,6 +4,7 @@ import android.app.ProgressDialog
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.widget.SwipeRefreshLayout
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
@@ -25,6 +26,7 @@ class NextMatchFragment: Fragment(), NextContract.View{
     lateinit var dialog : ProgressDialog
     lateinit var presenter: NextPresenter
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        (activity as AppCompatActivity).supportActionBar?.title = "Next Match"
         return inflater.inflate(R.layout.next_fragment, container, false)
     }
     override fun onActivityCreated(savedInstanceState: Bundle?) {
