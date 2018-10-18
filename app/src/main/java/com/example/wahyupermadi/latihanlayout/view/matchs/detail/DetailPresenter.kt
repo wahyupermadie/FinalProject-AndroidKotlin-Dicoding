@@ -1,15 +1,13 @@
-package com.example.wahyupermadi.latihanlayout.view.matchs
+package com.example.wahyupermadi.latihanlayout.view.matchs.detail
 
-import com.bumptech.glide.Glide
 import com.example.wahyupermadi.latihanlayout.api.ApiInterface
 import com.example.wahyupermadi.latihanlayout.model.TeamResponse
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subscribers.ResourceSubscriber
-import kotlinx.android.synthetic.main.activity_match_detail.*
-import org.jetbrains.anko.ctx
 
-class DetailPresenter (val mView : DetailContract.View, val apiService : ApiInterface) : DetailContract.Presenter{
+class DetailPresenter (val mView : DetailContract.View, val apiService : ApiInterface) :
+    DetailContract.Presenter {
     override fun getHomeBadge(id: String) {
         apiService.getTeamDetail(id)
             .observeOn(AndroidSchedulers.mainThread())

@@ -1,4 +1,4 @@
-package com.example.wahyupermadi.latihanlayout.view.matchs
+package com.example.wahyupermadi.latihanlayout.view.matchs.detail
 
 interface DetailContract {
 

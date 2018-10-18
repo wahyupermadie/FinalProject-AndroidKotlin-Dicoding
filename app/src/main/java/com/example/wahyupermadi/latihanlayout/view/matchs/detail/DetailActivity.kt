@@ -1,4 +1,4 @@
-package com.example.wahyupermadi.latihanlayout.view.matchs
+package com.example.wahyupermadi.latihanlayout.view.matchs.detail
 
 import android.database.sqlite.SQLiteConstraintException
 import android.support.v7.app.AppCompatActivity
@@ -16,11 +16,6 @@ import com.example.wahyupermadi.latihanlayout.api.ApiClient
 import com.example.wahyupermadi.latihanlayout.api.ApiInterface
 import com.example.wahyupermadi.latihanlayout.db.database
 import com.example.wahyupermadi.latihanlayout.model.MatchItem
-import com.example.wahyupermadi.latihanlayout.model.TeamResponse
-import com.example.wahyupermadi.latihanlayout.model.TeamsItem
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
-import io.reactivex.subscribers.ResourceSubscriber
 import kotlinx.android.synthetic.main.activity_match_detail.*
 import org.jetbrains.anko.ctx
 import org.jetbrains.anko.db.classParser
@@ -30,7 +25,8 @@ import org.jetbrains.anko.db.select
 import org.jetbrains.anko.toast
 import java.sql.SQLClientInfoException
 
-class DetailActivity : AppCompatActivity(), DetailContract.View {
+class DetailActivity : AppCompatActivity(),
+    DetailContract.View {
     var matchs : MatchItem? = null
     var presenter : DetailPresenter? = null
     private var menuItem: Menu? = null
@@ -38,10 +34,18 @@ class DetailActivity : AppCompatActivity(), DetailContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_match_detail)
+        supportActionBar?.title = "Match Detail"
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         matchs = intent.getParcelableExtra("match")
         checkFavorite()
         val apiInterface = ApiClient.client?.create(ApiInterface::class.java)
-        presenter = apiInterface?.let { DetailPresenter(this, it) }
+        presenter = apiInterface?.let {
+            DetailPresenter(
+                this,
+                it
+            )
+        }
         presenter?.getAwayBadge(matchs?.idAwayTeam.toString())
         presenter?.getHomeBadge(matchs?.idHomeTeam.toString())
 

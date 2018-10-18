@@ -2,9 +2,9 @@ package com.example.wahyupermadi.latihanlayout
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentStatePagerAdapter
+import com.example.wahyupermadi.latihanlayout.R.id.*
+import com.example.wahyupermadi.latihanlayout.view.favorite.FavoriteFragment
+import com.example.wahyupermadi.latihanlayout.view.matchs.MatchFragment
 import com.example.wahyupermadi.latihanlayout.view.matchs.next.NextMatchFragment
 import com.example.wahyupermadi.latihanlayout.view.matchs.past.PastMatchFragment
 import kotlinx.android.synthetic.main.activity_main.*
@@ -15,34 +15,35 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val fragmentAdapter = MyPagerAdapter(supportFragmentManager)
-        viewpager_main.adapter = fragmentAdapter
-        tabs_main.setupWithViewPager(viewpager_main)
+        bottom_navigation.setOnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                matchs -> {
+                    loadLastFragment(savedInstanceState)
+                }
+                favorites -> {
+                    loadFavoriteFragment(savedInstanceState)
+                }
+            }
+            true
+        }
+        bottom_navigation.selectedItemId = matchs
     }
 
-    class MyPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
-        override fun getItem(position: Int): Fragment {
-            return when (position) {
-                0 -> {
-                    PastMatchFragment()
-                }
-                else -> {
-                    NextMatchFragment()
-                }
-            }
+    private fun loadLastFragment(savedInstanceState: Bundle?){
+        if (savedInstanceState == null) {
+            supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.viewpager_main, MatchFragment(), MatchFragment::class.java.simpleName)
+                .commit()
         }
+    }
 
-        override fun getCount(): Int {
-            return 2
-        }
-
-        override fun getPageTitle(position: Int): CharSequence {
-            return when (position) {
-                0 -> "Past Event"
-                else -> {
-                    return "Next Event"
-                }
-            }
+    private fun loadFavoriteFragment(savedInstanceState: Bundle?) {
+        if (savedInstanceState == null){
+            supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.viewpager_main, FavoriteFragment(), FavoriteFragment::class.java.simpleName)
+                .commit()
         }
     }
 }
