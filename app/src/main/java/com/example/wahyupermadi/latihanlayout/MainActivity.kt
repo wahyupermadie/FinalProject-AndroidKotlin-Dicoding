@@ -22,16 +22,14 @@ class MainActivity : AppCompatActivity() {
 
     class MyPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
         override fun getItem(position: Int): Fragment {
-            val fragment:Fragment
-            when (position) {
+            return when (position) {
                 0 -> {
-                    fragment = PastMatchFragment()
+                    PastMatchFragment()
                 }
                 else -> {
-                    fragment = NextMatchFragment()
+                    NextMatchFragment()
                 }
             }
-            return fragment
         }
 
         override fun getCount(): Int {

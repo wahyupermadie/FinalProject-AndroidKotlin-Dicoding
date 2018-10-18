@@ -30,10 +30,9 @@ import org.jetbrains.anko.db.select
 import org.jetbrains.anko.toast
 import java.sql.SQLClientInfoException
 
-class MatchDetail : AppCompatActivity() {
+class DetailActivity : AppCompatActivity(), DetailContract.View {
     var matchs : MatchItem? = null
-    var homeTeam : MutableList<TeamsItem> = mutableListOf()
-    var awayTeam : MutableList<TeamsItem> = mutableListOf()
+    var presenter : DetailPresenter? = null
     private var menuItem: Menu? = null
     private var isFavorite : Boolean = false
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,8 +40,10 @@ class MatchDetail : AppCompatActivity() {
         setContentView(R.layout.activity_match_detail)
         matchs = intent.getParcelableExtra("match")
         checkFavorite()
-        getHomeImage(matchs?.idHomeTeam)
-        getAwayImage(matchs?.idAwayTeam)
+        val apiInterface = ApiClient.client?.create(ApiInterface::class.java)
+        presenter = apiInterface?.let { DetailPresenter(this, it) }
+        presenter?.getAwayBadge(matchs?.idAwayTeam.toString())
+        presenter?.getHomeBadge(matchs?.idHomeTeam.toString())
 
         tv_detail_match_date.text = matchs?.dateEvent
         tv_home_detail_team_name.text = matchs?.strHomeTeam
@@ -67,7 +68,6 @@ class MatchDetail : AppCompatActivity() {
         tv_away_detail_sub.text = matchs?.strAwayLineupSubstitutes
         tv_away_detail_team_formation.text = matchs?.strAwayFormation
     }
-
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(favorite_menu, menu)
         menuItem = menu
@@ -158,57 +158,11 @@ class MatchDetail : AppCompatActivity() {
         }
     }
 
-    fun getHomeImage(id : String?){
-        val apiService = ApiClient.client?.create(ApiInterface::class.java)!!
-        if (id != null) {
-            apiService.getTeamDetail(id)
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeOn(Schedulers.io())
-                    .subscribe(object : ResourceSubscriber<TeamResponse>(){
-                        override fun onComplete() {
-
-                        }
-
-                        override fun onNext(t: TeamResponse?) {
-                            t?.teams?.let {
-                                homeTeam.addAll(it)
-                                Glide.with(ctx).load(homeTeam.get(0).strTeamBadge).into(iv_detail_home)
-                            }
-
-                        }
-
-                        override fun onError(t: Throwable?) {
-                            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-                        }
-
-                    })
-        }
+    override fun showHomeBadge(imgHome: String) {
+        Glide.with(ctx).load(imgHome).into(iv_detail_home)
     }
 
-    fun getAwayImage(id : String?){
-        val apiService = ApiClient.client?.create(ApiInterface::class.java)!!
-        if (id != null) {
-            apiService.getTeamDetail(id)
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeOn(Schedulers.io())
-                    .subscribe(object : ResourceSubscriber<TeamResponse>(){
-                        override fun onComplete() {
-
-                        }
-
-                        override fun onNext(t: TeamResponse?) {
-                            t?.teams?.let {
-                                awayTeam.addAll(it)
-                                Glide.with(ctx).load(awayTeam.get(0).strTeamBadge).into(iv_detail_away)
-                            }
-
-                        }
-
-                        override fun onError(t: Throwable?) {
-                            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-                        }
-
-                    })
-        }
+    override fun showAwayBadge(imgAway: String) {
+        Glide.with(ctx).load(imgAway).into(iv_detail_away)
     }
 }

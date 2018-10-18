@@ -14,14 +14,12 @@ import io.reactivex.subscribers.ResourceSubscriber
 class NextPresenter(val mView : NextContract.View, val apiService : ApiInterface) : NextContract.Presenter{
     val compositeDisposable = CompositeDisposable()
     override fun getMatch() {
-        mView.showDialog()
         val disposable : Disposable
         disposable = apiService.getNextMatch()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribeWith(object : ResourceSubscriber<MatchResponse>(){
                     override fun onComplete() {
-                        mView.hideDialog()
                     }
 
                     override fun onNext(t: MatchResponse?) {
@@ -31,7 +29,6 @@ class NextPresenter(val mView : NextContract.View, val apiService : ApiInterface
 
                     override fun onError(t: Throwable?) {
                         Log.d(TAG,"HELL YEAH ERROR"+t)
-                        mView.hideDialog()
                     }
 
                 })
