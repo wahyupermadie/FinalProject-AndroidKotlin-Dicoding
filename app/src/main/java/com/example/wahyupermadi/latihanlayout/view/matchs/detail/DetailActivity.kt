@@ -1,9 +1,9 @@
 package com.example.wahyupermadi.latihanlayout.view.matchs.detail
 
 import android.database.sqlite.SQLiteConstraintException
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
+import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import com.bumptech.glide.Glide
@@ -27,8 +27,8 @@ import java.sql.SQLClientInfoException
 
 class DetailActivity : AppCompatActivity(),
     DetailContract.View {
-    var matchs : MatchItem? = null
-    var presenter : DetailPresenter? = null
+    private var matchs : MatchItem? = null
+    private var presenter : DetailPresenter? = null
     private var menuItem: Menu? = null
     private var isFavorite : Boolean = false
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,8 +42,7 @@ class DetailActivity : AppCompatActivity(),
         val apiInterface = ApiClient.client?.create(ApiInterface::class.java)
         presenter = apiInterface?.let {
             DetailPresenter(
-                this,
-                it
+                this, it
             )
         }
         presenter?.getAwayBadge(matchs?.idAwayTeam.toString())

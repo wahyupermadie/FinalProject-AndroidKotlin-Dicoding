@@ -2,7 +2,6 @@ package com.example.wahyupermadi.latihanlayout.view.matchs.past
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
@@ -12,23 +11,24 @@ import com.example.wahyupermadi.latihanlayout.adapter.PastMatchAdapter
 import com.example.wahyupermadi.latihanlayout.api.ApiClient
 import com.example.wahyupermadi.latihanlayout.api.ApiInterface
 import com.example.wahyupermadi.latihanlayout.model.MatchItem
+import com.example.wahyupermadi.latihanlayout.utils.AppSchedulerProvider
 import com.example.wahyupermadi.latihanlayout.view.matchs.detail.DetailActivity
 import kotlinx.android.synthetic.main.past_fragment.*
 import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.startActivity
 
 class PastMatchFragment : Fragment(), PastContract.View{
-    var pastMatchs : MutableList<MatchItem> = mutableListOf()
+    private var pastMatchs : MutableList<MatchItem> = mutableListOf()
     lateinit var presenter: PastPresenter
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        (activity as AppCompatActivity).supportActionBar?.title = "Last Match"
+
         return inflater.inflate(R.layout.past_fragment, container, false)
     }
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         val apiService = ApiClient.client?.create(ApiInterface::class.java)
-
-        presenter = PastPresenter(this, apiService!!)
+        val scheduler = AppSchedulerProvider()
+        presenter = PastPresenter(this, apiService!!, scheduler)
         presenter.getMatch()
 
         sr_beforematch.setOnRefreshListener {
@@ -47,7 +47,13 @@ class PastMatchFragment : Fragment(), PastContract.View{
         }
     }
 
-    companion object {
-        fun newInstance() : PastMatchFragment = PastMatchFragment()
+    override fun hideProgress() {
+        progress_before.visibility = View.GONE
+        rv_before.visibility = View.VISIBLE
+    }
+
+    override fun showProgress() {
+        progress_before.visibility = View.VISIBLE
+        rv_before.visibility = View.GONE
     }
 }

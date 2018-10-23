@@ -3,5 +3,17 @@
     <string name="favorite">Favorite</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="teamName">BARCELONA</string>
+    <string name="vs">VS</string>
+    <string name="dateMatch">Sunday 25 April 2015</string>
+    <string name="past_event_title">Past Event</string>
+    <string name="next_event_title">Next Event</string>
+    <string name="lineup">Lineup</string>
+    <string name="goal_keeper">Goal Keeper</string>
+    <string name="deffense">Deffense</string>
+    <string name="midfield">Midfield</string>
+    <string name="forward">Forward</string>
+    <string name="subtitutes">Subtitutes</string>
+    <string name="goals">Goals</string>
+    <string name="shots">Shots</string>
 </resources>

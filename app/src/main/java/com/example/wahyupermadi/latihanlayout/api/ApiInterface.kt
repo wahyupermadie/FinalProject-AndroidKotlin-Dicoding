@@ -3,7 +3,6 @@ package com.example.wahyupermadi.latihanlayout.api
 import com.example.wahyupermadi.latihanlayout.model.MatchResponse
 import com.example.wahyupermadi.latihanlayout.model.TeamResponse
 import io.reactivex.Flowable
-import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 

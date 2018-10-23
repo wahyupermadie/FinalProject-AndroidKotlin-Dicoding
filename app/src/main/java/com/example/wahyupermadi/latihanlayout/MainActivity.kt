@@ -1,12 +1,11 @@
 package com.example.wahyupermadi.latihanlayout
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import com.example.wahyupermadi.latihanlayout.R.id.*
+import android.support.v7.app.AppCompatActivity
+import com.example.wahyupermadi.latihanlayout.R.id.favorites
+import com.example.wahyupermadi.latihanlayout.R.id.matchs
 import com.example.wahyupermadi.latihanlayout.view.favorite.FavoriteFragment
 import com.example.wahyupermadi.latihanlayout.view.matchs.MatchFragment
-import com.example.wahyupermadi.latihanlayout.view.matchs.next.NextMatchFragment
-import com.example.wahyupermadi.latihanlayout.view.matchs.past.PastMatchFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {

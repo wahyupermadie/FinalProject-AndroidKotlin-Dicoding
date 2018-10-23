@@ -9,6 +9,18 @@
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+            <ProgressBar
+                android:paddingTop="10dp"
+                android:id="@+id/progress_next"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:indeterminate="true"
+                android:max="100"
+                android:backgroundTint="@color/white"
+                android:indeterminateTint="#1a09d6"
+                android:layout_marginTop="-7dp"/>
+
             <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv_next"
                     android:layout_width="match_parent"
