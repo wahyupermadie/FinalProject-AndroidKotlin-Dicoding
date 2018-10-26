@@ -1,9 +1,9 @@
-package com.example.wahyupermadi.latihanlayout.view.favorite
+package com.example.wahyupermadi.latihanlayout.view.favorite.match
 
 import android.content.Context
 import com.example.wahyupermadi.latihanlayout.model.MatchItem
 
-interface FavoriteContract{
+interface FavMatchContract{
     interface View{
         fun showFavoriteMatch(matchs : List<MatchItem>)
     }
