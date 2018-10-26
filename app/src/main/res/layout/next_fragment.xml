@@ -5,10 +5,15 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-        <android.support.constraint.ConstraintLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <LinearLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" android:orientation="vertical">
+            <Spinner
+                    android:id="@+id/spinner_next"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+            </Spinner>
             <ProgressBar
                 android:paddingTop="10dp"
                 android:id="@+id/progress_next"
@@ -27,6 +32,6 @@
                     android:layout_height="match_parent">
 
             </android.support.v7.widget.RecyclerView>
-        </android.support.constraint.ConstraintLayout>
+        </LinearLayout>
 
 </android.support.v4.widget.SwipeRefreshLayout>

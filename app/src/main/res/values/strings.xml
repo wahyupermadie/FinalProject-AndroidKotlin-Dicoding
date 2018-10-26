@@ -16,4 +16,8 @@
     <string name="subtitutes">Subtitutes</string>
     <string name="goals">Goals</string>
     <string name="shots">Shots</string>
-</resources>
+    <string name="match">Match</string>
+    <string name="teams">Teams</string>
+    <string name="select_league">Select League</string>
+    <string name="team_title">Team List</string>
+></resources>

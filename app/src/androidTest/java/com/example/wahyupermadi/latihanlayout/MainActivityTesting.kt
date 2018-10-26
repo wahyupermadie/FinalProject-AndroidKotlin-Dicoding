@@ -1,5 +1,6 @@
 package com.example.wahyupermadi.latihanlayout
 
+import android.support.test.espresso.Espresso
 import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.Espresso.pressBack
 import android.support.test.espresso.action.ViewActions
@@ -7,24 +8,33 @@ import android.support.test.espresso.action.ViewActions.swipeLeft
 import android.support.test.espresso.assertion.ViewAssertions
 import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.contrib.RecyclerViewActions
+import android.support.test.espresso.idling.CountingIdlingResource
 import android.support.test.espresso.matcher.ViewMatchers.*
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
 import android.support.v7.widget.RecyclerView
+import android.support.test.espresso.IdlingRegistry
 import com.example.wahyupermadi.latihanlayout.R.id.*
+import com.example.wahyupermadi.latihanlayout.utils.EspressoIdlingResource
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+
 
 @RunWith(AndroidJUnit4::class)
 class MainActivityTesting{
     @Rule
     @JvmField var activityRule = ActivityTestRule(MainActivity::class.java)
 
+    @Before
+    fun setUp(){
+        IdlingRegistry.getInstance().register(EspressoIdlingResource().getIdlingResource())
+    }
+
     @Test
     fun MainTesting(){
 
-        delay()
         onView(withId(rv_before)).check(matches(isDisplayed()))
         onView(withId(rv_before)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(5))
         onView(withId(rv_before)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(5, ViewActions.click()))

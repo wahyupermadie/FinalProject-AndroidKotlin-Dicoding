@@ -15,9 +15,13 @@ import com.example.wahyupermadi.latihanlayout.view.matchs.next.NextMatchFragment
 import com.example.wahyupermadi.latihanlayout.view.matchs.past.PastMatchFragment
 import kotlinx.android.synthetic.main.match_fragment.*
 import org.jetbrains.anko.support.v4.ctx
+import android.support.test.espresso.IdlingResource
+import android.support.annotation.VisibleForTesting
+import com.example.wahyupermadi.latihanlayout.utils.EspressoIdlingResource
+import io.reactivex.annotations.NonNull
+
 
 class MatchFragment : Fragment(){
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.match_fragment, container, false)
     }

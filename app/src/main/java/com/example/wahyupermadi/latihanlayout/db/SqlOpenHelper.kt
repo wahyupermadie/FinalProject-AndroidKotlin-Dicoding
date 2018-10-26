@@ -3,6 +3,7 @@ package com.example.wahyupermadi.latihanlayout.db
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import com.example.wahyupermadi.latihanlayout.model.MatchItem
+import com.example.wahyupermadi.latihanlayout.model.TeamsItem
 import org.jetbrains.anko.db.*
 
 class SqlOpenHelper(context: Context) : ManagedSQLiteOpenHelper(context, "db_matchs.db", null, 1) {
@@ -44,10 +45,21 @@ class SqlOpenHelper(context: Context) : ManagedSQLiteOpenHelper(context, "db_mat
             MatchItem.ID_AWAY to TEXT,
             MatchItem.AWAY_GOAL to TEXT,
             MatchItem.HOME_GOAL to TEXT)
+
+        database?.createTable(TeamsItem.TABLE_TEAM, true,
+            TeamsItem.ID to INTEGER + PRIMARY_KEY + AUTOINCREMENT,
+            TeamsItem.ID_TEAM to TEXT + UNIQUE,
+            TeamsItem.TEAM_NAME to TEXT,
+            TeamsItem.TEAM_BADGE to TEXT,
+            TeamsItem.TEAM_FORMED_YEAR to TEXT,
+            TeamsItem.TEAM_STADIUM to TEXT,
+            TeamsItem.TEAM_DESCRIPTION to TEXT
+        )
     }
 
     override fun onUpgrade(p0: SQLiteDatabase?, p1: Int, p2: Int) {
         p0?.dropTable(MatchItem.TABLE_MATCH, true)
+        p0?.dropTable(TeamsItem.TABLE_TEAM, true)
     }
 }
 val Context.database : SqlOpenHelper

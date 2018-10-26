@@ -1,54 +1,39 @@
 package com.example.wahyupermadi.latihanlayout.model
 
+import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class TeamsItem(
-	val intStadiumCapacity: String? = null,
-	val strTeamShort: String? = null,
-	val strSport: String? = null,
-	val strDescriptionCN: String? = null,
-	val strTeamJersey: String? = null,
-	val strTeamFanart2: String? = null,
-	val strTeamFanart3: String? = null,
-	val strTeamFanart4: String? = null,
-	val strStadiumDescription: String? = null,
-	val strTeamFanart1: String? = null,
-	val intLoved: String? = null,
-	val idLeague: String? = null,
-	val idSoccerXML: String? = null,
-	val strTeamLogo: String? = null,
-	val strDescriptionSE: String? = null,
-	val strDescriptionJP: String? = null,
-	val strDescriptionFR: String? = null,
-	val strStadiumLocation: String? = null,
-	val strDescriptionNL: String? = null,
-	val strCountry: String? = null,
-	val strRSS: String? = null,
-	val strDescriptionRU: String? = null,
-	val strTeamBanner: String? = null,
-	val strDescriptionNO: Any? = null,
-	val strStadiumThumb: String? = null,
-	val strDescriptionES: String? = null,
-	val intFormedYear: String? = null,
-	val strInstagram: String? = null,
-	val strDescriptionIT: String? = null,
-	val idTeam: String? = null,
-	val strDescriptionEN: String? = null,
-	val strWebsite: String? = null,
-	val strYoutube: String? = null,
-	val strDescriptionIL: String? = null,
-	val strLocked: String? = null,
-	val strAlternate: String? = null,
-	val strTeam: String? = null,
-	val strTwitter: String? = null,
-	val strDescriptionHU: String? = null,
-	val strGender: String? = null,
-	val strDivision: String? = null,
-	val strStadium: String? = null,
-	val strFacebook: String? = null,
-	val strTeamBadge: String? = null,
-	val strDescriptionPT: String? = null,
-	val strDescriptionDE: String? = null,
-	val strLeague: String? = null,
-	val strManager: String? = null,
-	val strKeywords: String? = null,
-	val strDescriptionPL: String? = null
-)
+	val id: Int?,
+	@SerializedName("idTeam")
+	var idTeam: String? = null,
+
+	@SerializedName("strTeam")
+	var strTeam: String? = null,
+
+	@SerializedName("strTeamBadge")
+	var strTeamBadge: String? = null,
+
+	@SerializedName("intFormedYear")
+	var intFormedYear: String? = null,
+
+	@SerializedName("strStadium")
+	var strStadium: String? = null,
+
+	@SerializedName("strDescriptionEN")
+	var strDescriptionEN: String? = null
+
+): Parcelable {
+	companion object {
+		const val TABLE_TEAM: String = "TABLE_TEAM"
+		const val ID: String = "ID_"
+		const val ID_TEAM: String = "ID_TEAM"
+		const val TEAM_NAME: String = "TEAM_NAME"
+		const val TEAM_BADGE: String = "TEAM_BADGE"
+		const val TEAM_FORMED_YEAR: String = "TEAM_FORMED_YEAR"
+		const val TEAM_STADIUM: String = "TEAM_STADIUM"
+		const val TEAM_DESCRIPTION: String = "TEAM_DESCRIPTION"
+	}
+}

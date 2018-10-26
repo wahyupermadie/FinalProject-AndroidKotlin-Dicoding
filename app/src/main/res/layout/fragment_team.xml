@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        android:orientation="vertical"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <Spinner
+                android:id="@+id/spinner_team"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/select_league"
+                android:textColorHint="#05ab9a"
+                app:met_floatingLabel="normal" />
+
+        <ProgressBar
+                android:paddingTop="10dp"
+                android:id="@+id/progress_teams"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:indeterminate="true"
+                android:max="100"
+                android:backgroundTint="@color/white"
+                android:indeterminateTint="#1a09d6"
+                android:layout_marginTop="-7dp"/>
+
+
+        <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_teams"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+        </android.support.v7.widget.RecyclerView>
+</LinearLayout>

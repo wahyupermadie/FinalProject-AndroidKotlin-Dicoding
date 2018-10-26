@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <TextView
+            android:text="wkwkwkwkwk"
+            android:layout_width="match_parent" android:layout_height="match_parent"/>
+    <ProgressBar
+            android:paddingTop="10dp"
+            android:id="@+id/progress_player"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:max="100"
+            android:backgroundTint="@color/white"
+            android:indeterminateTint="#1a09d6"
+            android:layout_marginTop="-7dp"/>
+
+    <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_player"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
+</android.support.constraint.ConstraintLayout>

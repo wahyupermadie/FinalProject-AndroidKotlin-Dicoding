@@ -9,6 +9,11 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+                <Spinner
+                        android:id="@+id/spinner_past"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                </Spinner>
                 <ProgressBar
                         android:paddingTop="10dp"
                         android:id="@+id/progress_before"
