@@ -29,7 +29,8 @@ data class MatchItem(
 		var idHomeTeam :  String? = null,
 		var idAwayTeam :  String? = null,
 		var strAwayGoalDetails :  String? = null,
-		var strHomeGoalDetails :  String? = null
+		var strHomeGoalDetails :  String? = null,
+		var strTime: String? = null
 ):Parcelable{
 	companion object {
 		const val TABLE_MATCH : String = "TABLE_MATCH"
@@ -58,5 +59,6 @@ data class MatchItem(
 		const val ID_AWAY : String = "ID_AWAY"
 		const val AWAY_GOAL : String = "AWAY_GOAL"
 		const val HOME_GOAL : String = "HOME_GOAL"
+		const val MATCH_TIME : String = "MATCH_TIME"
 	}
 }

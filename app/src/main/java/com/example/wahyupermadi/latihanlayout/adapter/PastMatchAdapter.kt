@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.wahyupermadi.latihanlayout.R
 import com.example.wahyupermadi.latihanlayout.model.MatchItem
+import com.example.wahyupermadi.latihanlayout.utils.showIndonesianDateTime
+import com.example.wahyupermadi.latihanlayout.utils.toGMTFormat
 import kotlinx.android.synthetic.main.past_lists.view.*
 
 
@@ -26,11 +28,24 @@ class PastMatchAdapter(private val matchs : List<MatchItem>, private val listene
 
 class PastMatchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     fun bindItem(matchItem: MatchItem, listener: (MatchItem) -> Unit) {
+        var localDate = ""
+        var localTime = ""
+        if(matchItem.dateEvent != null || matchItem.strTime != null){
+            val dateEvent = toGMTFormat(matchItem.dateEvent, matchItem.strTime)
+            val patternDate = "EEEE, dd MMM yyyy";
+            localDate = showIndonesianDateTime(
+                dateEvent, patternDate)
+            val patternTime = "HH:mm";
+            localTime = showIndonesianDateTime(
+                dateEvent, patternTime
+            )
+        }
         itemView.tv_away_past_name.text = matchItem.strAwayTeam
         itemView.tv_away_past_score.text = matchItem.intAwayScore
         itemView.tv_home_past_name.text = matchItem.strHomeTeam
         itemView.tv_home_past_score.text = matchItem.intHomeScore
-        itemView.tv_past_date.text = matchItem.dateEvent
+        itemView.tv_past_date.text = localDate
+        itemView.tv_past_time.text = localTime
         itemView.setOnClickListener {
             listener(matchItem)
         }

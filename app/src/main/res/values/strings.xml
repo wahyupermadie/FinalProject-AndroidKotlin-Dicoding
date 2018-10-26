@@ -20,4 +20,5 @@
     <string name="teams">Teams</string>
     <string name="select_league">Select League</string>
     <string name="team_title">Team List</string>
-></resources>
+    <string name="time_match">22:00</string>
+    ></resources>

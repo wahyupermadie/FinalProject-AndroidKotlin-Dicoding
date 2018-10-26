@@ -16,6 +16,8 @@ import com.example.wahyupermadi.latihanlayout.api.ApiClient
 import com.example.wahyupermadi.latihanlayout.api.ApiInterface
 import com.example.wahyupermadi.latihanlayout.db.database
 import com.example.wahyupermadi.latihanlayout.model.MatchItem
+import com.example.wahyupermadi.latihanlayout.utils.showIndonesianDateTime
+import com.example.wahyupermadi.latihanlayout.utils.toGMTFormat
 import kotlinx.android.synthetic.main.activity_match_detail.*
 import org.jetbrains.anko.ctx
 import org.jetbrains.anko.db.classParser
@@ -31,6 +33,8 @@ class DetailActivity : AppCompatActivity(),
     private var presenter : DetailPresenter? = null
     private var menuItem: Menu? = null
     private var isFavorite : Boolean = false
+    private var localTime = ""
+    private var localDate = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_match_detail)
@@ -39,6 +43,7 @@ class DetailActivity : AppCompatActivity(),
 
         matchs = intent.getParcelableExtra("match")
         checkFavorite()
+        setUpLocalDateTime()
         val apiInterface = ApiClient.client?.create(ApiInterface::class.java)
         presenter = apiInterface?.let {
             DetailPresenter(
@@ -48,7 +53,9 @@ class DetailActivity : AppCompatActivity(),
         presenter?.getAwayBadge(matchs?.idAwayTeam.toString())
         presenter?.getHomeBadge(matchs?.idHomeTeam.toString())
 
-        tv_detail_match_date.text = matchs?.dateEvent
+
+        tv_detail_match_date.text = localDate
+        tv_detail_match_time.text = localTime
         tv_home_detail_team_name.text = matchs?.strHomeTeam
         tv_home_detail_score.text = matchs?.intHomeScore
         tv_home_detail_deff.text = matchs?.strHomeLineupDefense
@@ -71,6 +78,19 @@ class DetailActivity : AppCompatActivity(),
         tv_away_detail_sub.text = matchs?.strAwayLineupSubstitutes
         tv_away_detail_team_formation.text = matchs?.strAwayFormation
     }
+
+    private fun setUpLocalDateTime() {
+        val dateEvent = toGMTFormat(matchs?.dateEvent, matchs?.strTime)
+        val patternDate = "EEEE, dd MMM yyyy";
+        localDate = showIndonesianDateTime(
+            dateEvent!!, patternDate)
+
+        val patternTime = "HH:mm";
+        localTime = showIndonesianDateTime(
+            dateEvent, patternTime
+        )
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(favorite_menu, menu)
         menuItem = menu
@@ -123,7 +143,8 @@ class DetailActivity : AppCompatActivity(),
                     MatchItem.ID_HOME to matchs?.idHomeTeam,
                     MatchItem.ID_AWAY to matchs?.idAwayTeam,
                     MatchItem.AWAY_GOAL to matchs?.strAwayGoalDetails,
-                    MatchItem.HOME_GOAL to matchs?.strHomeGoalDetails)
+                    MatchItem.HOME_GOAL to matchs?.strHomeGoalDetails,
+                    MatchItem.MATCH_TIME to matchs?.strTime)
             }
             toast("Successfully Added")
         }catch (e : SQLiteConstraintException){
