@@ -45,7 +45,8 @@ class SqlOpenHelper(context: Context) : ManagedSQLiteOpenHelper(context, "db_mat
             MatchItem.ID_AWAY to TEXT,
             MatchItem.AWAY_GOAL to TEXT,
             MatchItem.HOME_GOAL to TEXT,
-            MatchItem.MATCH_TIME to TEXT)
+            MatchItem.MATCH_TIME to TEXT,
+            MatchItem.MATCH_NAME to TEXT)
 
         database?.createTable(TeamsItem.TABLE_TEAM, true,
             TeamsItem.ID to INTEGER + PRIMARY_KEY + AUTOINCREMENT,

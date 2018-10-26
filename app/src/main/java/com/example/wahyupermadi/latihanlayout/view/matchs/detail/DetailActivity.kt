@@ -144,7 +144,8 @@ class DetailActivity : AppCompatActivity(),
                     MatchItem.ID_AWAY to matchs?.idAwayTeam,
                     MatchItem.AWAY_GOAL to matchs?.strAwayGoalDetails,
                     MatchItem.HOME_GOAL to matchs?.strHomeGoalDetails,
-                    MatchItem.MATCH_TIME to matchs?.strTime)
+                    MatchItem.MATCH_TIME to matchs?.strTime,
+                    MatchItem.MATCH_NAME to matchs?.strEvent)
             }
             toast("Successfully Added")
         }catch (e : SQLiteConstraintException){

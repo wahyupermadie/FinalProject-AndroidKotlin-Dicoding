@@ -1,8 +1,6 @@
 package com.example.wahyupermadi.latihanlayout.utils
 
 import android.annotation.SuppressLint
-import android.support.constraint.Constraints
-import android.util.Log
 import java.text.SimpleDateFormat
 import java.util.*
 

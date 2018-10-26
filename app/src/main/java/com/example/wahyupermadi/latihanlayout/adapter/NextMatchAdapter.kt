@@ -1,5 +1,7 @@
 package com.example.wahyupermadi.latihanlayout.adapter
 
+import android.content.Intent
+import android.provider.CalendarContract
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -45,6 +47,21 @@ class MatchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         itemView.tv_home_next_score.text = matchItem.intHomeScore
         itemView.tv_nextm_date.text = localDate
         itemView.tv_next_time.text = localTime
+
+        itemView.add_calendar.setOnClickListener {
+            val intent = Intent(Intent.ACTION_INSERT)
+                .setData(CalendarContract.Events.CONTENT_URI)
+                .putExtra(
+                    CalendarContract.EXTRA_EVENT_BEGIN_TIME,
+                    matchItem.dateEvent.let { it1 ->
+                        matchItem.strTime.let { it2 -> toGMTFormat(it1, it2)?.time
+                        }
+                    })
+                .putExtra(CalendarContract.Events.TITLE, matchItem.strEvent)
+                .putExtra(CalendarContract.Events.AVAILABILITY, CalendarContract.Events.AVAILABILITY_BUSY)
+            it.context.startActivity(intent)
+        }
+
         itemView.setOnClickListener {
             listener(matchItem)
         }
