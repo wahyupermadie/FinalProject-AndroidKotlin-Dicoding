@@ -6,8 +6,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subscribers.ResourceSubscriber
 
-class DetailPresenter (val mView : DetailContract.View, val apiService : ApiInterface) :
-    DetailContract.Presenter {
+class DetailMatchPresenter (val mView : DetailMatchContract.View, val apiService : ApiInterface) :
+    DetailMatchContract.Presenter {
     override fun getHomeBadge(id: String) {
         apiService.getTeamDetail(id)
             .observeOn(AndroidSchedulers.mainThread())

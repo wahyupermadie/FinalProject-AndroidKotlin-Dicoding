@@ -2,7 +2,7 @@ package com.example.wahyupermadi.latihanlayout.view.matchs.detail
 
 import com.example.wahyupermadi.latihanlayout.model.TeamsItem
 
-interface DetailContract {
+interface DetailMatchContract {
 
     interface View{
         fun showHomeBadge(imgHome : String)

@@ -27,10 +27,10 @@ import org.jetbrains.anko.db.select
 import org.jetbrains.anko.toast
 import java.sql.SQLClientInfoException
 
-class DetailActivity : AppCompatActivity(),
-    DetailContract.View {
+class DetailMatchActivity : AppCompatActivity(),
+    DetailMatchContract.View {
     private var matchs : MatchItem? = null
-    private var presenter : DetailPresenter? = null
+    private var presenter : DetailMatchPresenter? = null
     private var menuItem: Menu? = null
     private var isFavorite : Boolean = false
     private var localTime = ""
@@ -46,7 +46,7 @@ class DetailActivity : AppCompatActivity(),
         setUpLocalDateTime()
         val apiInterface = ApiClient.client?.create(ApiInterface::class.java)
         presenter = apiInterface?.let {
-            DetailPresenter(
+            DetailMatchPresenter(
                 this, it
             )
         }

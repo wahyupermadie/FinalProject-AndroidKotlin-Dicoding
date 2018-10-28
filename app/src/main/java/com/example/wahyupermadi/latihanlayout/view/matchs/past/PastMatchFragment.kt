@@ -15,7 +15,7 @@ import com.example.wahyupermadi.latihanlayout.api.ApiInterface
 import com.example.wahyupermadi.latihanlayout.model.Leagues
 import com.example.wahyupermadi.latihanlayout.model.MatchItem
 import com.example.wahyupermadi.latihanlayout.utils.AppSchedulerProvider
-import com.example.wahyupermadi.latihanlayout.view.matchs.detail.DetailActivity
+import com.example.wahyupermadi.latihanlayout.view.matchs.detail.DetailMatchActivity
 import kotlinx.android.synthetic.main.past_fragment.*
 import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.startActivity
@@ -45,7 +45,7 @@ class PastMatchFragment : Fragment(), PastContract.View{
         val layoutManager = LinearLayoutManager(ctx, LinearLayoutManager.VERTICAL, false)
         rv_before.layoutManager = layoutManager
         rv_before.adapter = PastMatchAdapter(pastMatchs){
-            startActivity<DetailActivity>("match" to it)
+            startActivity<DetailMatchActivity>("match" to it)
         }
     }
 

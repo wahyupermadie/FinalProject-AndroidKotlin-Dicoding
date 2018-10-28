@@ -15,11 +15,10 @@ import com.example.wahyupermadi.latihanlayout.api.ApiInterface
 import com.example.wahyupermadi.latihanlayout.model.Leagues
 import com.example.wahyupermadi.latihanlayout.model.MatchItem
 import com.example.wahyupermadi.latihanlayout.utils.AppSchedulerProvider
-import com.example.wahyupermadi.latihanlayout.view.matchs.detail.DetailActivity
+import com.example.wahyupermadi.latihanlayout.view.matchs.detail.DetailMatchActivity
 import kotlinx.android.synthetic.main.next_fragment.*
 import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.startActivity
-import org.jetbrains.anko.support.v4.toast
 
 class NextMatchFragment: Fragment(), NextContract.View{
     private var nextMatchs : MutableList<MatchItem> = mutableListOf()
@@ -84,7 +83,7 @@ class NextMatchFragment: Fragment(), NextContract.View{
         val layoutManager = LinearLayoutManager(ctx, LinearLayoutManager.VERTICAL, false)
         rv_next.layoutManager = layoutManager
         rv_next.adapter = NextMatchAdapter(nextMatchs){
-            startActivity<DetailActivity>("match" to it)
+            startActivity<DetailMatchActivity>("match" to it)
         }
     }
 }
