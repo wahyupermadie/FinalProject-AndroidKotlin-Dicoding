@@ -13,8 +13,11 @@ import com.example.wahyupermadi.latihanlayout.api.ApiInterface
 import com.example.wahyupermadi.latihanlayout.model.PlayerItem
 import com.example.wahyupermadi.latihanlayout.model.TeamsItem
 import com.example.wahyupermadi.latihanlayout.utils.AppSchedulerProvider
+import com.example.wahyupermadi.latihanlayout.view.teams.detailPlayer.DetailPlayerActivity
+import com.example.wahyupermadi.latihanlayout.view.teams.detailTeam.DetailTeamActivity
 import kotlinx.android.synthetic.main.fragment_player.*
 import org.jetbrains.anko.support.v4.ctx
+import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.toast
 
 class PlayerFragment : Fragment(), PlayerContract.View{
@@ -51,7 +54,7 @@ class PlayerFragment : Fragment(), PlayerContract.View{
         val layoutManager = LinearLayoutManager(ctx,LinearLayoutManager.VERTICAL, false)
         rv_player.layoutManager = layoutManager
         rv_player.adapter = PlayerAdapter(players){
-
+            startActivity<DetailPlayerActivity>("player" to it)
         }
     }
 }
