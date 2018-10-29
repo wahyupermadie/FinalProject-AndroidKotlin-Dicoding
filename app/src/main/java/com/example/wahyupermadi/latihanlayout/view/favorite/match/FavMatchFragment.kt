@@ -9,8 +9,6 @@ import android.view.ViewGroup
 import com.example.wahyupermadi.latihanlayout.R
 import com.example.wahyupermadi.latihanlayout.adapter.PastMatchAdapter
 import com.example.wahyupermadi.latihanlayout.model.MatchItem
-import com.example.wahyupermadi.latihanlayout.view.favorite.team.FavTeamContract
-import com.example.wahyupermadi.latihanlayout.view.favorite.team.FavTeamPresenter
 import com.example.wahyupermadi.latihanlayout.view.matchs.detail.DetailMatchActivity
 import kotlinx.android.synthetic.main.match_favorite_fragment.*
 import org.jetbrains.anko.support.v4.ctx

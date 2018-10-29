@@ -8,8 +8,6 @@ import com.bumptech.glide.Glide
 import com.example.wahyupermadi.latihanlayout.R
 import com.example.wahyupermadi.latihanlayout.model.PlayerItem
 import kotlinx.android.synthetic.main.player_list.view.*
-import kotlinx.android.synthetic.main.team_list.view.*
-import org.jetbrains.anko.sdk25.coroutines.onContextClick
 
 class PlayerAdapter(private val players : List<PlayerItem>, private val listener : (PlayerItem) -> Unit):RecyclerView.Adapter<PlayerAdapter.ViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int): PlayerAdapter.ViewHolder {

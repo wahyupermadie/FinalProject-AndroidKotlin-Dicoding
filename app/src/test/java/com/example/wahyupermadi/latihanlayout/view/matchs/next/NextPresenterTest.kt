@@ -6,13 +6,11 @@ import com.example.wahyupermadi.latihanlayout.model.MatchResponse
 import com.example.wahyupermadi.latihanlayout.utils.SchedulersProvider
 import com.example.wahyupermadi.latihanlayout.utils.TestSchedulersProvider
 import io.reactivex.Flowable
-import io.reactivex.Scheduler
-import org.junit.Test
-
-import org.junit.Assert.*
 import org.junit.Before
+import org.junit.Test
 import org.mockito.Mock
-import org.mockito.Mockito.*
+import org.mockito.Mockito.`when`
+import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
 
 class NextPresenterTest {
@@ -41,9 +39,9 @@ class NextPresenterTest {
         matchResponse = Flowable.just(match)
         scheduler = TestSchedulersProvider()
         presenter = NextPresenter(view,apiInterface, scheduler)
-        `when`(apiInterface.getNextMatch()).thenReturn(matchResponse)
+        `when`(apiInterface.getNextMatch("4328")).thenReturn(matchResponse)
 
-        presenter.getMatch()
+        presenter.getMatch("4328")
         verify(view).showProgress()
         verify(view).showNextMatch(matchs)
     }

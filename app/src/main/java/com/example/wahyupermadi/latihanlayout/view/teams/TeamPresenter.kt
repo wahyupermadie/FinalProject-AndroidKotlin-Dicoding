@@ -6,7 +6,6 @@ import com.example.wahyupermadi.latihanlayout.model.TeamResponse
 import com.example.wahyupermadi.latihanlayout.utils.SchedulersProvider
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
-import io.reactivex.disposables.Disposables
 import io.reactivex.subscribers.ResourceSubscriber
 
 class TeamPresenter(private val mView : TeamContract.View, private val apiInterface: ApiInterface, private val scheduler : SchedulersProvider):TeamContract.Presenter{

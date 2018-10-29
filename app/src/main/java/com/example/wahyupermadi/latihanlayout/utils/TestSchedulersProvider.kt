@@ -1,7 +1,6 @@
 package com.example.wahyupermadi.latihanlayout.utils
 
 import io.reactivex.Scheduler
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 class TestSchedulersProvider : SchedulersProvider {

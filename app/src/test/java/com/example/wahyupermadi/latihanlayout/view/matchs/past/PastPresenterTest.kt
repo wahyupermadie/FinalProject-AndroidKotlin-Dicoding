@@ -6,10 +6,8 @@ import com.example.wahyupermadi.latihanlayout.model.MatchResponse
 import com.example.wahyupermadi.latihanlayout.utils.SchedulersProvider
 import com.example.wahyupermadi.latihanlayout.utils.TestSchedulersProvider
 import io.reactivex.Flowable
-import org.junit.Test
-
-import org.junit.Assert.*
 import org.junit.Before
+import org.junit.Test
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.Mockito.`when`
@@ -41,9 +39,9 @@ class PastPresenterTest {
         matchsResponse = Flowable.just(match)
         scheduler = TestSchedulersProvider()
         presenter = PastPresenter(view,apiInterface,scheduler)
-        `when`(apiInterface.getPastMatch()).thenReturn(matchsResponse)
+        `when`(apiInterface.getPastMatch("4328")).thenReturn(matchsResponse)
 
-        presenter.getMatch()
+        presenter.getMatch("4328")
         Mockito.verify(view).showProgress()
         Mockito.verify(view).showPastMatch(matchs)
     }

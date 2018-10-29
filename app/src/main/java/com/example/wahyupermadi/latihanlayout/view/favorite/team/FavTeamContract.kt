@@ -1,7 +1,6 @@
 package com.example.wahyupermadi.latihanlayout.view.favorite.team
 
 import android.content.Context
-import com.example.wahyupermadi.latihanlayout.model.MatchItem
 import com.example.wahyupermadi.latihanlayout.model.TeamsItem
 
 interface FavTeamContract{

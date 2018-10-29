@@ -3,7 +3,6 @@ package com.example.wahyupermadi.latihanlayout.view.favorite.match
 import android.content.Context
 import com.example.wahyupermadi.latihanlayout.db.database
 import com.example.wahyupermadi.latihanlayout.model.MatchItem
-import com.example.wahyupermadi.latihanlayout.view.favorite.team.FavTeamContract
 import org.jetbrains.anko.db.classParser
 import org.jetbrains.anko.db.select
 

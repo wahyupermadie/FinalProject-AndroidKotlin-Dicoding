@@ -59,5 +59,9 @@
         2016 Copas América. After announcing his international retirement in 2016, he reversed his decision and led his
         country to qualification for the 2018 World Cup.
     </string>
+    <string name="queryHint">Input Search Key</string>
+    <string name="search">Search</string>
+    <string name="match_search">Input Match Name</string>
+    <string name="team_Search">Input Team Search</string>
     >
 </resources>

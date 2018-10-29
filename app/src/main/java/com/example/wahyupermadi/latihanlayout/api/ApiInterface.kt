@@ -1,9 +1,6 @@
 package com.example.wahyupermadi.latihanlayout.api
 
-import com.example.wahyupermadi.latihanlayout.model.LigaResponse
-import com.example.wahyupermadi.latihanlayout.model.MatchResponse
-import com.example.wahyupermadi.latihanlayout.model.PlayerResponse
-import com.example.wahyupermadi.latihanlayout.model.TeamResponse
+import com.example.wahyupermadi.latihanlayout.model.*
 import io.reactivex.Flowable
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -26,4 +23,10 @@ interface ApiInterface{
 
     @GET("lookup_all_players.php")
     fun getPlayer(@Query("id") id : String) : Flowable<PlayerResponse>
+
+    @GET("searchteams.php")
+    fun getTeamByName(@Query("t") t : String) : Flowable<TeamResponse>
+
+    @GET("searchevents.php")
+    fun getEventByName(@Query("e") e : String) : Flowable<SearchMatchResponse>
 }

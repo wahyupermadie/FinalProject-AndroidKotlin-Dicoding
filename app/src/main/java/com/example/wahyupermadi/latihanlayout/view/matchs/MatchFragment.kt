@@ -7,23 +7,24 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
 import android.support.v7.app.AppCompatActivity
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import com.example.wahyupermadi.latihanlayout.R
 import com.example.wahyupermadi.latihanlayout.view.matchs.next.NextMatchFragment
 import com.example.wahyupermadi.latihanlayout.view.matchs.past.PastMatchFragment
+import com.example.wahyupermadi.latihanlayout.view.matchs.search.SearchMatchActivity
 import kotlinx.android.synthetic.main.match_fragment.*
 import org.jetbrains.anko.support.v4.ctx
-import android.support.test.espresso.IdlingResource
-import android.support.annotation.VisibleForTesting
-import com.example.wahyupermadi.latihanlayout.utils.EspressoIdlingResource
-import io.reactivex.annotations.NonNull
+import org.jetbrains.anko.support.v4.startActivity
 
 
 class MatchFragment : Fragment(){
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.match_fragment, container, false)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -52,6 +53,19 @@ class MatchFragment : Fragment(){
             }
 
         })
+    }
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater?.inflate(R.menu.search_icon, menu)
+
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item?.itemId){
+            R.id.id_search->
+                startActivity<SearchMatchActivity>()
+        }
+        return true
     }
 
     class MyPagerAdapter(fm: FragmentManager?, val context: Context) : FragmentStatePagerAdapter(fm) {

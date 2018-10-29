@@ -1,13 +1,13 @@
 package com.example.wahyupermadi.latihanlayout.view.teams.detailTeam
 
 import android.graphics.Color
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
 import android.support.v4.content.ContextCompat
+import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -18,7 +18,6 @@ import com.example.wahyupermadi.latihanlayout.view.teams.overview.OverviewFragme
 import com.example.wahyupermadi.latihanlayout.view.teams.player.PlayerFragment
 import kotlinx.android.synthetic.main.activity_detail_team.*
 import org.jetbrains.anko.ctx
-import org.jetbrains.anko.design.snackbar
 
 class DetailTeamActivity : AppCompatActivity(), DetailTeamContract.View {
     private lateinit var teams : TeamsItem

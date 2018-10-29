@@ -1,7 +1,5 @@
 package com.example.wahyupermadi.latihanlayout.view.matchs.detail
 
-import com.example.wahyupermadi.latihanlayout.model.TeamsItem
-
 interface DetailMatchContract {
 
     interface View{

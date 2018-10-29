@@ -1,14 +1,10 @@
 package com.example.wahyupermadi.latihanlayout.view.teams
 
-import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.example.wahyupermadi.latihanlayout.R
@@ -16,15 +12,13 @@ import com.example.wahyupermadi.latihanlayout.adapter.TeamAdapter
 import com.example.wahyupermadi.latihanlayout.api.ApiClient
 import com.example.wahyupermadi.latihanlayout.api.ApiInterface
 import com.example.wahyupermadi.latihanlayout.model.Leagues
-import com.example.wahyupermadi.latihanlayout.model.LigaResponse
 import com.example.wahyupermadi.latihanlayout.model.TeamsItem
 import com.example.wahyupermadi.latihanlayout.utils.AppSchedulerProvider
 import com.example.wahyupermadi.latihanlayout.view.teams.detailTeam.DetailTeamActivity
+import com.example.wahyupermadi.latihanlayout.view.teams.search.SearchTeamActivity
 import kotlinx.android.synthetic.main.fragment_team.*
 import org.jetbrains.anko.support.v4.ctx
-import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
 import org.jetbrains.anko.support.v4.startActivity
-import org.jetbrains.anko.support.v4.toast
 
 
 class TeamFragment : Fragment(), TeamContract.View{
@@ -36,6 +30,12 @@ class TeamFragment : Fragment(), TeamContract.View{
         rootView = layoutInflater.inflate(R.layout.fragment_team, container, false)
         return rootView
     }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         (activity as AppCompatActivity).supportActionBar?.title = context?.getString(R.string.team_title)
@@ -49,6 +49,19 @@ class TeamFragment : Fragment(), TeamContract.View{
         ligas.clear()
         ligas.addAll(liga)
         setSpinner()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.search_icon, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item?.itemId){
+            R.id.id_search->
+                startActivity<SearchTeamActivity>()
+        }
+        return true
     }
 
     private fun setSpinner() {

@@ -1,7 +1,7 @@
 package com.example.wahyupermadi.latihanlayout.view.teams.detailPlayer
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import com.bumptech.glide.Glide
 import com.example.wahyupermadi.latihanlayout.R
